@@ -28,12 +28,21 @@ const binarySearch = (arr, target) => {
   return -1;
 };
 
-const bigArray = generateBigArray(1000000);
+const sizes = [1000, 100000, 10000000];
+const target = 123456789;
 
-console.time("Linear Search");
-linearSearch(bigArray, 999999);
-console.timeEnd("Linear Search");
+const bigArray = sizes.map(size => generateBigArray(size));
 
-console.time("Binary Search");
-binarySearch(bigArray, 999999);
-console.timeEnd("Binary Search");
+for (let i = 0; i < sizes.length; i++) {
+  console.time(`Linear Search ${sizes[i]}`);
+  linearSearch(bigArray[i], target);
+  console.timeEnd(`Linear Search ${sizes[i]}`);
+}
+
+console.log("---");
+
+for (let i = 0; i < sizes.length; i++) {
+  console.time(`Binary Search ${sizes[i]}`);
+  binarySearch(bigArray[i], target);
+  console.timeEnd(`Binary Search ${sizes[i]}`);
+}
